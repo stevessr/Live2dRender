@@ -5,9 +5,9 @@
  * that can be found at https://www.live2d.com/eula/live2d-open-software-license-agreement_en.html.
  */
 
-import { CubismMatrix44 } from '@framework/math/cubismmatrix44';
-import { ACubismMotion } from '@framework/motion/acubismmotion';
-import { csmVector } from '@framework/type/csmvector';
+import { CubismMatrix44 } from '../../SDK/Framework/src/math/cubismmatrix44';
+import { ACubismMotion } from '../../SDK/Framework/src/motion/acubismmotion';
+import { csmVector } from '../../SDK/Framework/src/type/csmvector';
 
 import LAppDefine from './lappdefine';
 import { canvas } from './lappdelegate';
@@ -20,7 +20,7 @@ import { reloadToolBox } from './toolbox';
 export let s_instance: LAppLive2DManager = null;
 
 /**
- * サンプルアプリケーションにおいてCubismModelを管理するクラス
+ * サンプルアプリケーションにおいて CubismModel を管理するクラス
  * モデル生成と破棄、タップイベントの処理、モデル切り替えを行う。
  */
 export class LAppLive2DManager {
@@ -53,7 +53,7 @@ export class LAppLive2DManager {
      * 現在のシーンで保持しているモデルを返す。
      *
      * @param no モデルリストのインデックス値
-     * @return モデルのインスタンスを返す。インデックス値が範囲外の場合はNULLを返す。
+     * @return モデルのインスタンスを返す。インデックス値が範囲外の場合は NULL を返す。
      */
     public getModel(no: number): LAppModel {
         if (no < this._models.getSize()) {
@@ -214,7 +214,7 @@ export class LAppLive2DManager {
             reloadToolBox();            
         }, 500);
 
-        pinkLog("[Live2dRender] 模型重载完成，重载路径: " + modelPath);
+        pinkLog("[Live2dRender] 模型重载完成，重载路径：" + modelPath);
     }
 
     public setViewMatrix(m: CubismMatrix44) {
@@ -232,7 +232,7 @@ export class LAppLive2DManager {
         this.loadLive2dModel();
     }
 
-    _viewMatrix: CubismMatrix44; // モデル描画に用いるview行列
+    _viewMatrix: CubismMatrix44; // モデル描画に用いる view 行列
     _models: csmVector<LAppModel>; // モデルインスタンスのコンテナ
     _sceneIndex: number; // 表示するシーンのインデックス値
     // モーション再生終了のコールバック関数

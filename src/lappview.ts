@@ -5,8 +5,8 @@
  * that can be found at https://www.live2d.com/eula/live2d-open-software-license-agreement_en.html.
  */
 
-import { CubismMatrix44 } from '@framework/math/cubismmatrix44';
-import { CubismViewMatrix } from '@framework/math/cubismviewmatrix';
+import { CubismMatrix44 } from '../../SDK/Framework/src/math/cubismmatrix44';
+import { CubismViewMatrix } from '../../SDK/Framework/src/math/cubismviewmatrix';
 
 import LAppDefine from './lappdefine';
 import { canvas, gl, LAppDelegate } from './lappdelegate';
@@ -46,7 +46,7 @@ export class LAppView {
         const bottom: number = LAppDefine.ViewLogicalLeft;
         const top: number = LAppDefine.ViewLogicalRight;
 
-        this._viewMatrix.setScreenRect(left, right, bottom, top); // デバイスに対応する画面の範囲。 Xの左端、Xの右端、Yの下端、Yの上端
+        this._viewMatrix.setScreenRect(left, right, bottom, top); // デバイスに対応する画面の範囲。X の左端、X の右端、Y の下端、Y の上端
         this._viewMatrix.scale(LAppDefine.ViewScale, LAppDefine.ViewScale);
 
         this._deviceToScreen.loadIdentity();
@@ -118,8 +118,8 @@ export class LAppView {
     /**
      * タッチされた時に呼ばれる。
      *
-     * @param pointX スクリーンX座標
-     * @param pointY スクリーンY座標
+     * @param pointX スクリーン X 座標
+     * @param pointY スクリーン Y 座標
      */
     public onTouchesBegan(pointX: number, pointY: number): void {
         this._touchManager.touchesBegan(pointX, pointY);
@@ -128,8 +128,8 @@ export class LAppView {
     /**
      * タッチしているときにポインタが動いたら呼ばれる。
      *
-     * @param pointX スクリーンX座標
-     * @param pointY スクリーンY座標
+     * @param pointX スクリーン X 座標
+     * @param pointY スクリーン Y 座標
      */
     public onTouchesMoved(pointX: number, pointY: number): void {
         const viewX: number = this.transformViewX(this._touchManager.getX());
@@ -144,8 +144,8 @@ export class LAppView {
     /**
      * タッチが終了したら呼ばれる。
      *
-     * @param pointX スクリーンX座標
-     * @param pointY スクリーンY座標
+     * @param pointX スクリーン X 座標
+     * @param pointY スクリーン Y 座標
      */
     public onTouchesEnded(pointX: number, pointY: number): void {
         // タッチ終了
@@ -169,9 +169,9 @@ export class LAppView {
     }
 
     /**
-     * X座標をView座標に変換する。
+     * X 座標を View 座標に変換する。
      *
-     * @param deviceX デバイスX座標
+     * @param deviceX デバイス X 座標
      */
     public transformViewX(deviceX: number): number {
         const screenX: number = this._deviceToScreen.transformX(deviceX); // 論理座標変換した座標を取得。
@@ -179,9 +179,9 @@ export class LAppView {
     }
 
     /**
-     * Y座標をView座標に変換する。
+     * Y 座標を View 座標に変換する。
      *
-     * @param deviceY デバイスY座標
+     * @param deviceY デバイス Y 座標
      */
     public transformViewY(deviceY: number): number {
         const screenY: number = this._deviceToScreen.transformY(deviceY); // 論理座標変換した座標を取得。
@@ -189,17 +189,17 @@ export class LAppView {
     }
 
     /**
-     * X座標をScreen座標に変換する。
-     * @param deviceX デバイスX座標
+     * X 座標を Screen 座標に変換する。
+     * @param deviceX デバイス X 座標
      */
     public transformScreenX(deviceX: number): number {
         return this._deviceToScreen.transformX(deviceX);
     }
 
     /**
-     * Y座標をScreen座標に変換する。
+     * Y 座標を Screen 座標に変換する。
      *
-     * @param deviceY デバイスY座標
+     * @param deviceY デバイス Y 座標
      */
     public transformScreenY(deviceY: number): number {
         return this._deviceToScreen.transformY(deviceY);
@@ -208,7 +208,7 @@ export class LAppView {
     _touchManager: TouchManager; // タッチマネージャー
     _deviceToScreen: CubismMatrix44; // デバイスからスクリーンへの行列
     _viewMatrix: CubismViewMatrix; // viewMatrix
-    _programId: WebGLProgram; // シェーダID
+    _programId: WebGLProgram; // シェーダ ID
     _changeModel: boolean; // モデル切り替えフラグ
     _isClick: boolean; // クリック中
 }

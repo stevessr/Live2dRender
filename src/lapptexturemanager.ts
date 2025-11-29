@@ -5,7 +5,7 @@
  * that can be found at https://www.live2d.com/eula/live2d-open-software-license-agreement_en.html.
  */
 
-import { csmVector, iterator } from '@framework/type/csmvector';
+import { csmVector, iterator } from '../../SDK/Framework/src/type/csmvector';
 
 import { gl } from './lappdelegate';
 import LAppDefine from './lappdefine';
@@ -41,8 +41,8 @@ export class LAppTextureManager {
      * 从远程载入 材质 文件，可以是 png，也可以是 webp
      *
      * @param fileName 読み込む画像ファイルパス名
-     * @param usePremultiply Premult処理を有効にするか
-     * @return 画像情報、読み込み失敗時はnullを返す
+     * @param usePremultiply Premult 処理を有効にするか
+     * @return 画像情報、読み込み失敗時は null を返す
      */
     public async createTextureFromFile(
         fileName: string,
@@ -59,8 +59,8 @@ export class LAppTextureManager {
                 ite.ptr().fileName == fileName &&
                 ite.ptr().usePremultply == usePremultiply
             ) {
-                // 2回目以降はキャッシュが使用される(待ち時間なし)
-                // WebKitでは同じImageのonloadを再度呼ぶには再インスタンスが必要
+                // 2 回目以降はキャッシュが使用される (待ち時間なし)
+                // WebKit では同じ Image の onload を再度呼ぶには再インスタンスが必要
                 // 詳細：https://stackoverflow.com/a/5024181
                 ite.ptr().img = new Image();
                 ite.ptr().img.onload = (): void => callback(ite.ptr());
@@ -87,7 +87,7 @@ export class LAppTextureManager {
             );
             gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
 
-            // Premult処理を行わせる
+            // Premult 処理を行わせる
             if (usePremultiply) {
                 gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, 1);
             }
@@ -181,6 +181,6 @@ export class TextureInfo {
     id: WebGLTexture = null; // テクスチャ
     width = 0; // 横幅
     height = 0; // 高さ
-    usePremultply: boolean; // Premult処理を有効にするか
+    usePremultply: boolean; // Premult 処理を有効にするか
     fileName: string; // ファイル名
 }

@@ -6,7 +6,7 @@
  * that can be found at https://www.live2d.com/eula/live2d-open-software-license-agreement_en.html.
  */
 
-import { CubismFramework, Option } from '@framework/live2dcubismframework';
+import { CubismFramework, Option } from '../../SDK/Framework/src/live2dcubismframework';
 
 import LAppDefine from './lappdefine';
 import { LAppLive2DManager } from './lapplive2dmanager';
@@ -26,7 +26,7 @@ export type CanvasSize = { width: number; height: number } | 'auto';
 
 /**
  * アプリケーションクラス。
- * Cubism SDKの管理を行う。
+ * Cubism SDK の管理を行う。
  */
 export class LAppDelegate {
     /**
@@ -55,7 +55,7 @@ export class LAppDelegate {
     }
 
     /**
-     * APPに必要な物を初期化する。
+     * APP に必要な物を初期化する。
      */
     public initialize(): boolean {
         // キャンバスの作成
@@ -84,7 +84,7 @@ export class LAppDelegate {
         canvas.style.opacity = '0';
         canvas.style.transition = '.7s cubic-bezier(0.23, 1, 0.32, 1)';
 
-        // glコンテキストを初期化
+        // gl コンテキストを初期化
         // @ts-ignore
         gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
 
@@ -92,7 +92,7 @@ export class LAppDelegate {
             console.log('Cannot initialize WebGL. This browser does not support.');
             gl = null;
 
-            // gl初期化失敗
+            // gl 初期化失敗
             return false;
         }
 
@@ -127,10 +127,10 @@ export class LAppDelegate {
             canvas.onmouseup = onClickEnded;
         }
 
-        // AppViewの初期化
+        // AppView の初期化
         this._view.initialize();
 
-        // Cubism SDKの初期化
+        // Cubism SDK の初期化
         this.initializeCubism();
 
         return true;
@@ -163,7 +163,7 @@ export class LAppDelegate {
         // リソースを解放
         LAppLive2DManager.releaseInstance();
 
-        // Cubism SDKの解放
+        // Cubism SDK の解放
         CubismFramework.dispose();
     }
 
@@ -271,7 +271,7 @@ export class LAppDelegate {
     }
 
     /**
-     * View情報を取得する。
+     * View 情報を取得する。
      */
     public getView(): LAppView {
         return this._view;
@@ -296,7 +296,7 @@ export class LAppDelegate {
     }
 
     /**
-     * Cubism SDKの初期化
+     * Cubism SDK の初期化
      */
     public initializeCubism(): void {
         // setup cubism
@@ -322,11 +322,11 @@ export class LAppDelegate {
     }
 
     _cubismOption: Option; // Cubism SDK Option
-    _view: LAppView; // View情報
+    _view: LAppView; // View 情報
     _captured: boolean; // クリックしているか
-    _mouseX: number; // マウスX座標
-    _mouseY: number; // マウスY座標
-    _isEnd: boolean; // APP終了しているか
+    _mouseX: number; // マウス X 座標
+    _mouseY: number; // マウス Y 座標
+    _isEnd: boolean; // APP 終了しているか
     _textureManager: LAppTextureManager; // テクスチャマネージャー
 }
 

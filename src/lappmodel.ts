@@ -7,43 +7,43 @@
 
 import 'whatwg-fetch';
 
-import { CubismDefaultParameterId } from '@framework/cubismdefaultparameterid';
-import { CubismModelSettingJson } from '@framework/cubismmodelsettingjson';
+import { CubismDefaultParameterId } from '../../SDK/Framework/src/cubismdefaultparameterid';
+import { CubismModelSettingJson } from '../../SDK/Framework/src/cubismmodelsettingjson';
 import {
     BreathParameterData,
     CubismBreath
-} from '@framework/effect/cubismbreath';
-import { CubismEyeBlink } from '@framework/effect/cubismeyeblink';
-import { ICubismModelSetting } from '@framework/icubismmodelsetting';
-import { CubismIdHandle } from '@framework/id/cubismid';
-import { CubismFramework } from '@framework/live2dcubismframework';
-import { CubismMatrix44 } from '@framework/math/cubismmatrix44';
-import { CubismUserModel } from '@framework/model/cubismusermodel';
+} from '../../SDK/Framework/src/effect/cubismbreath';
+import { CubismEyeBlink } from '../../SDK/Framework/src/effect/cubismeyeblink';
+import { ICubismModelSetting } from '../../SDK/Framework/src/icubismmodelsetting';
+import { CubismIdHandle } from '../../SDK/Framework/src/id/cubismid';
+import { CubismFramework } from '../../SDK/Framework/src/live2dcubismframework';
+import { CubismMatrix44 } from '../../SDK/Framework/src/math/cubismmatrix44';
+import { CubismUserModel } from '../../SDK/Framework/src/model/cubismusermodel';
 import {
     ACubismMotion,
     FinishedMotionCallback
-} from '@framework/motion/acubismmotion';
-import { CubismMotion } from '@framework/motion/cubismmotion';
+} from '../../SDK/Framework/src/motion/acubismmotion';
+import { CubismMotion } from '../../SDK/Framework/src/motion/cubismmotion';
 import {
     CubismMotionQueueEntryHandle,
     InvalidMotionQueueEntryHandleValue
-} from '@framework/motion/cubismmotionqueuemanager';
-import { csmMap } from '@framework/type/csmmap';
-import { csmRect } from '@framework/type/csmrectf';
-import { csmString } from '@framework/type/csmstring';
-import { csmVector } from '@framework/type/csmvector';
+} from '../../SDK/Framework/src/motion/cubismmotionqueuemanager';
+import { csmMap } from '../../SDK/Framework/src/type/csmmap';
+import { csmRect } from '../../SDK/Framework/src/type/csmrectf';
+import { csmString } from '../../SDK/Framework/src/type/csmstring';
+import { csmVector } from '../../SDK/Framework/src/type/csmvector';
 import {
     CSM_ASSERT,
     CubismLogError,
     CubismLogInfo
-} from '@framework/utils/cubismdebug';
+} from '../../SDK/Framework/src/utils/cubismdebug';
 
 import LAppDefine from './lappdefine';
 import { canvas, frameBuffer, gl, LAppDelegate } from './lappdelegate';
 import { LAppPal } from './lapppal';
 import { TextureInfo } from './lapptexturemanager';
 import { LAppWavFileHandler } from './lappwavfilehandler';
-import { CubismMoc } from '@framework/model/cubismmoc';
+import { CubismMoc } from '../../SDK/Framework/src/model/cubismmoc';
 import { cacheFetch } from './cache';
 
 enum LoadStep {
@@ -78,7 +78,7 @@ enum LoadStep {
  */
 export class LAppModel extends CubismUserModel {
     /**
-     * model3.jsonが置かれたディレクトリとファイルパスからモデルを生成する
+     * model3.json が置かれたディレクトリとファイルパスからモデルを生成する
      * @param dir
      * @param filePath model3.json 文件的路径
      */
@@ -101,10 +101,10 @@ export class LAppModel extends CubismUserModel {
     }
 
     /**
-     * model3.jsonからモデルを生成する。
-     * model3.jsonの記述に従ってモデル生成、モーション、物理演算などのコンポーネント生成を行う。
+     * model3.json からモデルを生成する。
+     * model3.json の記述に従ってモデル生成、モーション、物理演算などのコンポーネント生成を行う。
      *
-     * @param setting ICubismModelSettingのインスタンス
+     * @param setting ICubismModelSetting のインスタンス
      */
     private setupModel(setting: ICubismModelSetting): void {
         this._updating = true;
@@ -489,7 +489,7 @@ export class LAppModel extends CubismUserModel {
 
         // ドラッグによる変化
         // ドラッグによる顔の向きの調整
-        this._model.addParameterValueById(this._idParamAngleX, this._dragX * 30); // -30から30の値を加える
+        this._model.addParameterValueById(this._idParamAngleX, this._dragX * 30); // -30 から 30 の値を加える
         this._model.addParameterValueById(this._idParamAngleY, this._dragY * 30);
         this._model.addParameterValueById(
             this._idParamAngleZ,
@@ -500,10 +500,10 @@ export class LAppModel extends CubismUserModel {
         this._model.addParameterValueById(
             this._idParamBodyAngleX,
             this._dragX * 10
-        ); // -10から10の値を加える
+        ); // -10 から 10 の値を加える
 
         // ドラッグによる目の向きの調整
-        this._model.addParameterValueById(this._idParamEyeBallX, this._dragX); // -1から1の値を加える
+        this._model.addParameterValueById(this._idParamEyeBallX, this._dragX); // -1 から 1 の値を加える
         this._model.addParameterValueById(this._idParamEyeBallY, this._dragY);
 
         // 呼吸など
@@ -518,7 +518,7 @@ export class LAppModel extends CubismUserModel {
 
         // リップシンクの設定
         if (this._lipsync) {
-            let value = 0.0; // リアルタイムでリップシンクを行う場合、システムから音量を取得して、0~1の範囲で値を入力します。
+            let value = 0.0; // リアルタイムでリップシンクを行う場合、システムから音量を取得して、0~1 の範囲で値を入力します。
 
             this._wavFileHandler.update(deltaTimeSeconds);
             value = this._wavFileHandler.getRms();
@@ -620,7 +620,7 @@ export class LAppModel extends CubismUserModel {
      * @param group モーショングループ名
      * @param priority 優先度
      * @param onFinishedMotionHandler モーション再生終了時に呼び出されるコールバック関数
-     * @return 開始したモーションの識別番号を返す。個別のモーションが終了したか否かを判定するisFinished()の引数で使用する。開始できない時は[-1]
+     * @return 開始したモーションの識別番号を返す。個別のモーションが終了したか否かを判定する isFinished() の引数で使用する。開始できない時は [-1]
      */
     public startRandomMotion(
         group: string,
@@ -641,7 +641,7 @@ export class LAppModel extends CubismUserModel {
     /**
      * 引数で指定した表情モーションをセットする
      *
-     * @param expressionId 表情モーションのID
+     * @param expressionId 表情モーションの ID
      */
     public setExpression(expressionId: string): void {        
         const motion: ACubismMotion = this._expressions.getValue(expressionId);
@@ -687,11 +687,11 @@ export class LAppModel extends CubismUserModel {
 
     /**
      * 当たり判定テスト
-     * 指定ＩＤの頂点リストから矩形を計算し、座標をが矩形範囲内か判定する。
+     * 指定 ID の頂点リストから矩形を計算し、座標をが矩形範囲内か判定する。
      *
-     * @param hitArenaName  当たり判定をテストする対象のID
-     * @param x             判定を行うX座標
-     * @param y             判定を行うY座標
+     * @param hitArenaName  当たり判定をテストする対象の ID
+     * @param x             判定を行う X 座標
+     * @param y             判定を行う Y 座標
      */
     public hitTest(hitArenaName: string, x: number, y: number): boolean {
         // 透明時は当たり判定無し。
@@ -788,7 +788,7 @@ export class LAppModel extends CubismUserModel {
     }
 
     /**
-     * モデルを描画する処理。モデルを描画する空間のView-Projection行列を渡す。
+     * モデルを描画する処理。モデルを描画する空間の View-Projection 行列を渡す。
      */
     public doDraw(): void {
         if (this._model == null) return;
@@ -801,7 +801,7 @@ export class LAppModel extends CubismUserModel {
     }
 
     /**
-     * モデルを描画する処理。モデルを描画する空間のView-Projection行列を渡す。
+     * モデルを描画する処理。モデルを描画する空間の View-Projection 行列を渡す。
      */
     public draw(matrix: CubismMatrix44): void {
         if (this._model == null) {
@@ -895,10 +895,10 @@ export class LAppModel extends CubismUserModel {
 
     _modelSetting: ICubismModelSetting; // モデルセッティング情報
     _modelHomeDir: string; // モデルセッティングが置かれたディレクトリ
-    _userTimeSeconds: number; // デルタ時間の積算値[秒]
+    _userTimeSeconds: number; // デルタ時間の積算値 [秒]
 
-    _eyeBlinkIds: csmVector<CubismIdHandle>; // モデルに設定された瞬き機能用パラメータID
-    _lipSyncIds: csmVector<CubismIdHandle>; // モデルに設定されたリップシンク機能用パラメータID
+    _eyeBlinkIds: csmVector<CubismIdHandle>; // モデルに設定された瞬き機能用パラメータ ID
+    _lipSyncIds: csmVector<CubismIdHandle>; // モデルに設定されたリップシンク機能用パラメータ ID
 
     _motions: csmMap<string, ACubismMotion>; // 読み込まれているモーションのリスト
     _expressions: csmMap<string, ACubismMotion>; // 読み込まれている表情のリスト
@@ -906,18 +906,18 @@ export class LAppModel extends CubismUserModel {
     _hitArea: csmVector<csmRect>;
     _userArea: csmVector<csmRect>;
 
-    _idParamAngleX: CubismIdHandle; // パラメータID: ParamAngleX
-    _idParamAngleY: CubismIdHandle; // パラメータID: ParamAngleY
-    _idParamAngleZ: CubismIdHandle; // パラメータID: ParamAngleZ
-    _idParamEyeBallX: CubismIdHandle; // パラメータID: ParamEyeBallX
-    _idParamEyeBallY: CubismIdHandle; // パラメータID: ParamEyeBAllY
-    _idParamBodyAngleX: CubismIdHandle; // パラメータID: ParamBodyAngleX
+    _idParamAngleX: CubismIdHandle; // パラメータ ID: ParamAngleX
+    _idParamAngleY: CubismIdHandle; // パラメータ ID: ParamAngleY
+    _idParamAngleZ: CubismIdHandle; // パラメータ ID: ParamAngleZ
+    _idParamEyeBallX: CubismIdHandle; // パラメータ ID: ParamEyeBallX
+    _idParamEyeBallY: CubismIdHandle; // パラメータ ID: ParamEyeBAllY
+    _idParamBodyAngleX: CubismIdHandle; // パラメータ ID: ParamBodyAngleX
 
     _state: number; // 現在のステータス管理用
     _expressionCount: number; // 表情データカウント
     _textureCount: number; // テクスチャカウント
     _motionCount: number; // モーションデータカウント
     _allMotionCount: number; // モーション総数
-    _wavFileHandler: LAppWavFileHandler; //wavファイルハンドラ
-    _consistency: boolean; // MOC3一貫性チェック管理用
+    _wavFileHandler: LAppWavFileHandler; //wav ファイルハンドラ
+    _consistency: boolean; // MOC3 一貫性チェック管理用
 }

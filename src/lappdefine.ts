@@ -5,7 +5,7 @@
  * that can be found at https://www.live2d.com/eula/live2d-open-software-license-agreement_en.html.
  */
 
-import { LogLevel } from '@framework/live2dcubismframework';
+import { LogLevel } from '../../SDK/Framework/src/live2dcubismframework';
 
 /**
  * 配置参数
@@ -39,7 +39,7 @@ interface ILAppDefine {
     ViewLogicalMaxBottom: number
     ViewLogicalMaxTop: number
 
-    // 资源路径，必须是model3文件的地址
+    // 资源路径，必须是 model3 文件的地址
     ResourcesPath: string
 
     // 结束按钮
