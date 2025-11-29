@@ -16,6 +16,19 @@ import { LAppPal } from './lapppal';
 import { pinkLog, redLog } from './utils';
 import { reloadToolBox } from './toolbox';
 
+export {
+    CubismMatrix44,
+    ACubismMotion,
+    csmVector,
+    LAppDefine,
+    canvas,
+    LAppModel,
+    LAppPal,
+    pinkLog,
+    redLog,
+    reloadToolBox,
+};
+
 // 单例模式全局变量
 export let s_instance: LAppLive2DManager = null;
 
@@ -202,16 +215,16 @@ export class LAppLive2DManager {
 
         // 装载新的模型，并加载新的资源
         const appModel = new LAppModel();
-        
+
         // TODO: 支持更多的模型
-        this._models.pushBack(appModel);        
+        this._models.pushBack(appModel);
 
         // 装载模型
         await appModel.loadAssets(modelPath, modelJsonPath);
 
         // 下一个 tick 中，重新制作工具栏，更新表情
         setTimeout(() => {
-            reloadToolBox();            
+            reloadToolBox();
         }, 500);
 
         pinkLog("[Live2dRender] 模型重载完成，重载路径：" + modelPath);

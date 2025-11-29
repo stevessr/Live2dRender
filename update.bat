@@ -1,1 +1,0 @@
-python scripts/update.py
